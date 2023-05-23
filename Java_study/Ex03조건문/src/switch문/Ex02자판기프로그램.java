@@ -54,7 +54,9 @@ public class Ex02자판기프로그램 {
 
 		System.out.println("잔돈 : " + money);
 		int bill = money / 1000;
-		System.out.println("천원 : " + bill + "개");
+		int fiveCoin = (money - (bill*1000)) / 500;
+		int oneCoin = (money - (bill*1000) - (fiveCoin*500)) / 100;
+		System.out.println("천원 : " + bill + "개, " + "500원 : " + fiveCoin + "개, " + "100원 : " + oneCoin + "개");
 		sc.close();
 	}
 
