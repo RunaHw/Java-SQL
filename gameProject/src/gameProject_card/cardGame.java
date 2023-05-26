@@ -27,6 +27,7 @@ public class cardGame {
 			else if (start == 2) {
 				System.out.println("-------------------------------------------------------------------");
 				System.out.println("결과 >> 승 : " + winCount + ", 패 : " + loseCount);
+				System.out.println("Your money = " + money);
 				System.out.println("-------------------------------------------------------------------");
 				continue;
 			}
