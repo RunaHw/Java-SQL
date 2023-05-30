@@ -1,6 +1,5 @@
 package ex0526;
 
-
 import java.util.Random;
 import java.util.Scanner;
 
@@ -21,7 +20,7 @@ public class 배열예제03another {
 				}
 			}
 		}
-		
+
 		for (int i = 0; i < arr.length; i++) {
 			System.out.print(arr[i] + " ");
 		}

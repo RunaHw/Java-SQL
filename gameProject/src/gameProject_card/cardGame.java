@@ -49,11 +49,11 @@ public class cardGame {
 			boolean selectRight = false;
 			int select = 0;
 
-			int bigger = card1 >= card2 ? card1 * 10 + card2 : card2 * 10 + card1;
+			int cardCombination = card1 >= card2 ? card1 * 10 + card2 : card2 * 10 + card1;
 			int opp = card1 >= opp2 ? opp1 * 10 + opp2 : opp2 * 10 + opp1;
 			System.out.println("-------------------------------------------------------------------");
 			System.out.println("당신의 카드 >> card1 : " + card1 + ", card2 : " + card2);
-			System.out.println("당신의 카드 조합 >> " + bigger);
+			System.out.println("당신의 카드 조합 >> " + cardCombination);
 			System.out.println("-------------------------------------------------------------------");
 			System.out.println();
 			System.out.println("1. 이긴다.  2. 진다. 3. SIMILAR>>(+-5차이)");
@@ -100,60 +100,60 @@ public class cardGame {
 
 			for (int i = 1; i <= 3; i++) {
 				if (select == i) {
-					if (bigger > opp - 5 && bigger > opp + 5) {
+					if (cardCombination > opp - 5 && cardCombination > opp + 5) {
 						if (select == 1) {
-							System.out.println("나의 패 >>" + bigger + " : 상대 패 >> " + opp);
+							System.out.println("나의 패 >>" + cardCombination + " : 상대 패 >> " + opp);
 							System.out.println("result = The total of your cards is greater than your opponent's");
 							System.out.println("Summery >> YOU WIN");
 							winCount++;
-							money += batting * 1.5;
+							money += batting * 2;
 						} else if (select == 2) {
-							System.out.println("나의 패 >>" + bigger + " : 상대 패 >> " + opp);
+							System.out.println("나의 패 >>" + cardCombination + " : 상대 패 >> " + opp);
 							System.out.println("result = The total of your cards is less than your opponent's");
 							System.out.println("Summery >> YOU LOSE");
 							loseCount++;
 						} else {
-							System.out.println("나의 패 >>" + bigger + " : 상대 패 >> " + opp);
+							System.out.println("나의 패 >>" + cardCombination + " : 상대 패 >> " + opp);
 							System.out.println("result = Your number and your opponent's number are the similar.");
 							System.out.println("Summery >> YOU LOSE");
 							loseCount++;
 						}
 
-					} else if (bigger < opp - 5 && bigger < opp + 5) {
+					} else if (cardCombination < opp - 5 && cardCombination < opp + 5) {
 						if (select == 1) {
-							System.out.println("나의 패 >>" + bigger + " : 상대 패 >> " + opp);
+							System.out.println("나의 패 >>" + cardCombination + " : 상대 패 >> " + opp);
 							System.out.println("result = The total of your cards is greater than your opponent's");
 							System.out.println("Summery >> YOU LOSE");
 							loseCount++;
 						} else if (select == 2) {
-							System.out.println("나의 패 >>" + bigger + " : 상대 패 >> " + opp);
+							System.out.println("나의 패 >>" + cardCombination + " : 상대 패 >> " + opp);
 							System.out.println("result = The total of your cards is less than your opponent's");
 							System.out.println("Summery >> YOU WIN");
 							winCount++;
-							money += batting * 1.5;
+							money += batting * 2;
 						} else {
-							System.out.println("나의 패 >>" + bigger + " : 상대 패 >> " + opp);
+							System.out.println("나의 패 >>" + cardCombination + " : 상대 패 >> " + opp);
 							System.out.println("result = Your number and your opponent's number are the similar.");
 							System.out.println("Summery >> YOU LOSE");
 							loseCount++;
 						}
 					} else {
 						if (select == 1) {
-							System.out.println("나의 패 >>" + bigger + " : 상대 패 >> " + opp);
+							System.out.println("나의 패 >>" + cardCombination + " : 상대 패 >> " + opp);
 							System.out.println("result = The total of your cards is greater than your opponent's");
 							System.out.println("Summery >> YOU LOSE");
 							loseCount++;
 						} else if (select == 2) {
-							System.out.println("나의 패 >>" + bigger + " : 상대 패 >> " + opp);
+							System.out.println("나의 패 >>" + cardCombination + " : 상대 패 >> " + opp);
 							System.out.println("result = The total of your cards is less than your opponent's");
 							System.out.println("Summery >> YOU LOSE");
 							loseCount++;
 						} else {
-							System.out.println("나의 패 >>" + bigger + " : 상대 패 >> " + opp);
+							System.out.println("나의 패 >>" + cardCombination + " : 상대 패 >> " + opp);
 							System.out.println("result = Your number and your opponent's number are the similar.");
 							System.out.println("Summery >> YOU WIN");
 							winCount++;
-							money += batting * 2.5;
+							money += batting * 5;
 						}
 					}
 				}

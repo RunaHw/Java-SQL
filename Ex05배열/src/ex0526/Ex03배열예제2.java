@@ -16,14 +16,13 @@ public class Ex03배열예제2 {
 
 		for (int i = 0; i < arr.length; i++) {
 			arr[i] = ran.nextInt(10) + 1;
-		}
-		for (int i = 0; i < arr.length; i++) {
 			bigNum = bigNum > arr[i] ? bigNum : arr[i];
 		}
+		
 		System.out.println("배열 안에 들어있는 값 : " + Arrays.toString(arr));
 		System.out.println("가장 큰 값은 " + bigNum + "입니다.");
 		sc.close();
 
 	}
-
+ 
 }
