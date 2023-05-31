@@ -21,8 +21,8 @@ public class ex03예제 {
 		}
 		
 		
-		for(int i = 0; i<3; i++) {
-			for(int j =0; j<2; j++) {
+		for(int i = 0; i<col; i++) {
+			for(int j =0; j<row; j++) {
 				System.out.print(numbers[j][i] + "\t");;				
 			}
 			System.out.println();
