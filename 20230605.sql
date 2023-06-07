@@ -150,8 +150,21 @@ SELECT MEMBER_ID
      , AGE
      , GRADE_CD
   FROM TB_MEMBER A
- WHERE NOT EXISTS(SELECT 1
+ WHERE NOT EXISTS(SELECT 2
                     FROM TB_ORDER
                    WHERE MEMBER_ID = A.MEMBER_ID)
    AND GRADE_CD =3;
-                
+
+SELECT *
+  FROM TB_MEMBER_LIKE;
+      
+//¹®Á¦3            
+SELECT DISTINCT A.PRD_TYPE
+  FROM TB_PRD A
+ WHERE NOT EXISTS (SELECT 1
+                    FROM TB_MEMBER_LIKE
+                   WHERE LIKE_PRD_TYPE = A.PRD_TYPE
+                     AND MEMBER_ID = 'BBBBB');
+    
+
+  
