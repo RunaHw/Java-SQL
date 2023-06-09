@@ -23,7 +23,6 @@ public class Pocketmon {
 	}
 	
 	
-
 	//----------------------------------------------------------------------------------
 	public String getName() {
 		return name;
