@@ -7,16 +7,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-
 public class MemberSystem {
 	static Connection conn = null;
 	static ResultSet rs = null;
 	static PreparedStatement psmt = null;
 	static Scanner sc = new Scanner(System.in);
-	
 
 	public static void main(String[] args) {
-		
 
 		// 각각 흩어져 있는 기능들을 통합적으로 합치기!
 
@@ -32,28 +29,29 @@ public class MemberSystem {
 				String pw = sc.next();
 				System.out.print("나이 >> ");
 				int age = sc.nextInt();
-				
+
 				int r = insert(id, pw, age);
-				
-				if(r > 0) {
+
+				if (r > 0) {
 					System.out.println("회원가입 성공!");
-				}
-				else {
+				} else {
 					System.out.println("회원가입 실패!");
 				}
 			} else if (choice == 2) {
 				// 로그인 기능 -> select
-				System.out.print("ID를 입력해 주세여");
+				System.out.print("ID를 입력해 주세여 >> ");
 				String id = sc.next();
-				System.out.print("PW를 입력해 주세여");
+				System.out.print("PW를 입력해 주세여 >> ");
 				String pw = sc.next();
-				if(select(id, pw)) {
-					System.out.println(id+"님 환영합니다.");
-				}
-				else {
+
+				
+				if (select(id,pw)) {
+					System.out.println(id + "님 환영합니다.");
+
+				} else {
 					System.out.println("아이디나 비밀번호가 잘못되었습니다.");
 				}
-				
+
 			} else if (choice == 3) {
 				// 정보수정 기능 -> update
 				System.out.print("[1]비밀번호 수정 [2]나이 수정 >> ");
@@ -61,26 +59,24 @@ public class MemberSystem {
 				System.out.print("ID를 입력해주세요.");
 				String id = sc.next();
 				update(id, select);
-				if(result > 0) {
+				if (result > 0) {
 					System.out.println("변경되었습니다.");
-				}
-				else {
+				} else {
 					System.out.println("변경되지 않았습니다.");
 				}
-				
+
 			} else if (choice == 4) {
 				// 회원탈퇴 기능 -> delete
 				System.out.print("삭제할 ID를 적어주세요 >> ");
 				String id = sc.next();
 				System.out.print("삭제할 PW를 적어주세요 >> ");
 				String pw = sc.next();
-				if(delete(id, pw)>0) {
+				if (delete(id, pw) > 0) {
 					System.out.println("삭제되었습니다.");
-				}
-				else {
+				} else {
 					System.out.println("삭제되지 않았습니다.");
 				}
-				
+
 			} else if (choice == 5) {
 				System.out.println("감사합니다. 종료되었습니다.");
 				break;
@@ -91,7 +87,7 @@ public class MemberSystem {
 
 	}// main 끝
 
-	//----------------------------------------------------------------------------------------
+	// ----------------------------------------------------------------------------------------
 	// 모든 기능들이 공통적으로 사용하는 getCon(), Close() 생성
 	public static void getCon() {
 		// 드라이버 동적 로딩
@@ -111,10 +107,11 @@ public class MemberSystem {
 		}
 
 	}
-	//----------------------------------------------------------------------------------------
+
+	// ----------------------------------------------------------------------------------------
 	public static void Close() {
 		// 자원을 반납할 수 있는 기능 -> psmt, conn, rs
-		
+
 		try {
 			if (rs != null) {
 				rs.close();
@@ -130,67 +127,67 @@ public class MemberSystem {
 		}
 
 	}
-	//----------------------------------------------------------------------------------------
+
+	// ----------------------------------------------------------------------------------------
 	// 모든 메소드에서 사용할 수 있는 결과값 변수!
 	static int result = 0;
+
 	// 각 기능에 대한 메소드 구조 생성!
 	public static int insert(String id, String pw, int age) {
 		getCon();
 		// insert() 호출시 필요한 데이터 전달!
-		
+
 		try {
 			String sql = "INSERT INTO MEMBER VALUES(?, ?, ?)";
-			psmt =conn.prepareStatement(sql);
-			
+			psmt = conn.prepareStatement(sql);
+
 			psmt.setString(1, id);
 			psmt.setString(2, pw);
 			psmt.setInt(3, age);
-			
+
 			result = psmt.executeUpdate();
-			
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		finally {
 			Close();
 		}
-		
+
 		return result;
 	}
 
-	//----------------------------------------------------------------------------------------
+	// ----------------------------------------------------------------------------------------
 	static boolean isTrue = false;
 	public static boolean select(String id, String pw) {
 		getCon();
-		
+
 		String sql = "select * from member where id= ? and pw =?";
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, id);
 			psmt.setString(2, pw);
-			
+
 			rs = psmt.executeQuery();
-			isTrue =  rs.next();
-			
+			isTrue = rs.next();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			Close();
 		}
-		
+
 		return isTrue;
 	}
 
-	//----------------------------------------------------------------------------------------
+	// ----------------------------------------------------------------------------------------
 	public static int update(String id, int select) {
 		getCon();
-		if(select == 1) {
+		if (select == 1) {
 			System.out.println("변경할 비밀번호를 입력해 주세요.");
 			String sql = "Update member set pw = ? where id = ?";
 			String pw = sc.next();
-			
+
 			try {
 				psmt = conn.prepareStatement(sql);
 				psmt.setString(1, pw);
@@ -198,10 +195,11 @@ public class MemberSystem {
 				result = psmt.executeUpdate();
 			} catch (SQLException e) {
 				e.printStackTrace();
+			} finally {
+				Close();
 			}
-			
-			
-		}else if(select ==2) {
+
+		} else if (select == 2) {
 			System.out.println("변경할 나이를 입력해 주세요.");
 			String sql = "Update member set age = ? where id = ?";
 			int age = sc.nextInt();
@@ -212,16 +210,16 @@ public class MemberSystem {
 				result = psmt.executeUpdate();
 			} catch (SQLException e) {
 				e.printStackTrace();
-			}finally {
+			} finally {
 				Close();
 			}
 		}
-		
+
 		return result;
-		
-		
+
 	}
-	//----------------------------------------------------------------------------------------
+
+	// ----------------------------------------------------------------------------------------
 	public static int delete(String id, String pw) {
 		getCon();
 
@@ -230,12 +228,12 @@ public class MemberSystem {
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, id);
 			psmt.setString(2, pw);
-			
+
 			result = psmt.executeUpdate();
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			Close();
 		}
 		return result;
