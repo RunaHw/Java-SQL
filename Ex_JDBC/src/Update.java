@@ -40,6 +40,9 @@ public class Update {
 			psmt.setString(1, newPW);
 			psmt.setString(2, ID);
 			
+			// DB데이터 변경 --> DML : ~~행이 변경되었습니다.
+			// executeUpdate() --> DML을 쓸떄만 사용
+			// 몇 행이 변경이 일어났는가?
 			int result = psmt.executeUpdate();
 			if(result >0) {
 				System.out.println("비밀번호가 변경 되었습니다.");
@@ -62,6 +65,7 @@ public class Update {
 				if(conn != null) {
 					conn.close();
 				}
+				sc.close();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
